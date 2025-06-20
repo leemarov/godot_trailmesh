@@ -6,6 +6,7 @@
 #include <godot_cpp/classes/material.hpp>
 #include <godot_cpp/classes/node3d.hpp>
 #include <godot_cpp/variant/packed_vector3_array.hpp>
+#include <godot_cpp/variant/color.hpp>
 
 namespace godot {
 
@@ -22,6 +23,7 @@ private:
 	float size;
 	double update_interval;
 	double uv_shift;
+	bool trail_persist;
 	TrailMesh *trail_mesh;
 	NodePath geometry_root;
 	Color emitter_color;
@@ -65,6 +67,9 @@ public:
 
 	double get_update_interval() const;
 	void set_update_interval(double value);
+
+	bool get_trail_persist() const;
+	void set_trail_persist(bool value);
 
 	void offset_mesh_points(Vector3 offset);
 };

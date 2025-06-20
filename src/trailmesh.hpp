@@ -43,6 +43,7 @@ private:
 	Ref<Gradient> gradient;
 
 	void update_transform();
+	void persist_root();
 
 protected:
 	static void _bind_methods();

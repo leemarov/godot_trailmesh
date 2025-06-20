@@ -80,6 +80,15 @@ Ref<Gradient> TrailMesh::get_gradient() const {
 	return gradient;
 }
 
+void TrailMesh::persist_root() {
+	Transform3D global_transform = get_global_transform();
+	if (is_inside_tree()) {
+		Viewport *vp = get_viewport();
+		get_parent()->remove_child(self);
+		vp->add_child(self);
+	}
+}
+
 TrailMesh::~TrailMesh() {
 	if (trail_emitter) {
 		trail_emitter->trail_mesh = nullptr;
