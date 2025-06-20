@@ -62,6 +62,9 @@ public:
 	float get_noise_scale() const;
 	void set_noise_scale(float value);
 
+	Color get_emitter_color() const;
+	void set_emitter_color(Color color);
+
 	double get_uv_shift() const;
 	void set_uv_shift(double value);
 
@@ -72,6 +75,8 @@ public:
 	void set_trail_persist(bool value);
 
 	void offset_mesh_points(Vector3 offset);
+
+	void create_trailmesh();
 };
 } //namespace godot
 
