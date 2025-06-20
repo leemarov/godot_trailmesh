@@ -26,6 +26,10 @@ void TrailEmitter::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("set_update_interval", "value"), &TrailEmitter::set_update_interval);
 	ClassDB::bind_method(D_METHOD("get_update_interval"), &TrailEmitter::get_update_interval);
 	ClassDB::bind_method(D_METHOD("offset_mesh_points", "amount"), &TrailEmitter::offset_mesh_points);
+	ClassDB::bind_method(D_METHOD("set_trail_persist"), &TrailEmitter::set_trail_persist);
+	ClassDB::bind_method(D_METHOD("get_trail_persist"), &TrailEmitter::get_trail_persist);
+	ClassDB::bind_method(D_METHOD("set_emitter_color"), &TrailEmitter::set_emitter_color);
+	ClassDB::bind_method(D_METHOD("get_emitter_color"), &TrailEmitter::get_emitter_color);
 
 	ClassDB::add_property("TrailEmitter", PropertyInfo(Variant::OBJECT, "material", PROPERTY_HINT_RESOURCE_TYPE, "Material"), "set_material", "get_material");
 	ClassDB::add_property("TrailEmitter", PropertyInfo(Variant::OBJECT, "curve", PROPERTY_HINT_RESOURCE_TYPE, "Curve"), "set_curve", "get_curve");
