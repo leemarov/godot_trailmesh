@@ -23,7 +23,6 @@ private:
 	float size;
 	double update_interval;
 	double uv_shift;
-	bool trail_persist;
 	TrailMesh *trail_mesh;
 	NodePath geometry_root;
 	Color emitter_color;

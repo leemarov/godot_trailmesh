@@ -42,7 +42,6 @@ void TrailEmitter::_bind_methods() {
 	ClassDB::add_property("TrailEmitter", PropertyInfo(Variant::FLOAT, "size"), "set_size", "get_size");
 	ClassDB::add_property("TrailEmitter", PropertyInfo(Variant::FLOAT, "uv_shift"), "set_uv_shift", "get_uv_shift");
 	ClassDB::add_property("TrailEmitter", PropertyInfo(Variant::FLOAT, "update_interval"), "set_update_interval", "get_update_interval");
-	ClassDB::add_property("TrailEmitter", PropertyInfo(Variant::BOOL, "trail_persist"), "set_trail_persist", "get_trail_persist");
 }
 
 TrailEmitter::TrailEmitter() {
@@ -51,7 +50,6 @@ TrailEmitter::TrailEmitter() {
 	uv_shift = 0.0;
 	noise_scale = 0.0;
 	update_interval = 0.1;
-	trail_persist = true;
 	trail_mesh = nullptr;
 	emitter_color = Color(1.0,1.0,1.0,1.0);
 }
@@ -64,9 +62,7 @@ TrailEmitter::~TrailEmitter() {
 
 void TrailEmitter::persist_trail() {
 	if (trail_mesh) {
-		if (trail_persist) {
-			trail_mesh->persist_root();
-		}
+		trail_mesh->persist_root();
 		trail_mesh->trail_emitter = nullptr;
 		trail_mesh = nullptr;
 	}
@@ -81,14 +77,6 @@ void TrailEmitter::set_update_interval(double value) {
 	if (trail_mesh) {
 		trail_mesh->update_interval = update_interval;
 	}
-}
-
-void TrailEmitter::set_trail_persist(bool value) {
-	trail_persist = value;
-}
-
-bool TrailEmitter::get_trail_persist() const {
-	return trail_persist;
 }
 
 void TrailEmitter::set_geometry_root(NodePath nodepath) {
