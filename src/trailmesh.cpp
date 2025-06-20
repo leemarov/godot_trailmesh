@@ -87,12 +87,15 @@ void TrailMesh::persist_root() {
 		get_parent()->remove_child(this);
 		vp->add_child(this);
 	}
+	set_global_transform(global_transform);
+	UtilityFunctions::print("tried to persist_root");
 }
 
 TrailMesh::~TrailMesh() {
 	if (trail_emitter) {
 		trail_emitter->trail_mesh = nullptr;
 	}
+	UtilityFunctions::print("trail_mesh deleted");
 	delete[] trail_points;
 }
 
