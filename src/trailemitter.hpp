@@ -77,6 +77,7 @@ public:
 	void offset_mesh_points(Vector3 offset);
 
 	void create_trailmesh();
+	void persist_trail();
 };
 } //namespace godot
 

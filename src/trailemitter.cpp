@@ -30,6 +30,7 @@ void TrailEmitter::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_trail_persist"), &TrailEmitter::get_trail_persist);
 	ClassDB::bind_method(D_METHOD("set_emitter_color"), &TrailEmitter::set_emitter_color);
 	ClassDB::bind_method(D_METHOD("get_emitter_color"), &TrailEmitter::get_emitter_color);
+	ClassDB::bind_method(D_METHOD("persist_trail"), &TrailEmitter::persist_trail);
 
 	ClassDB::add_property("TrailEmitter", PropertyInfo(Variant::OBJECT, "material", PROPERTY_HINT_RESOURCE_TYPE, "Material"), "set_material", "get_material");
 	ClassDB::add_property("TrailEmitter", PropertyInfo(Variant::OBJECT, "curve", PROPERTY_HINT_RESOURCE_TYPE, "Curve"), "set_curve", "get_curve");
@@ -57,10 +58,17 @@ TrailEmitter::TrailEmitter() {
 
 TrailEmitter::~TrailEmitter() {
 	if (trail_mesh) {
+		trail_mesh->trail_emitter = nullptr;
+	}
+}
+
+void TrailEmitter::persist_trail() {
+	if (trail_mesh) {
 		if (trail_persist) {
 			trail_mesh->persist_root();
 		}
 		trail_mesh->trail_emitter = nullptr;
+		trail_mesh = nullptr;
 	}
 }
 
