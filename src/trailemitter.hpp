@@ -77,6 +77,7 @@ public:
 
 	void create_trailmesh();
 	void persist_trail();
+	void reset_trailmesh();
 };
 } //namespace godot
 

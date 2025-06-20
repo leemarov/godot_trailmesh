@@ -31,6 +31,7 @@ void TrailEmitter::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("set_emitter_color"), &TrailEmitter::set_emitter_color);
 	ClassDB::bind_method(D_METHOD("get_emitter_color"), &TrailEmitter::get_emitter_color);
 	ClassDB::bind_method(D_METHOD("persist_trail"), &TrailEmitter::persist_trail);
+	ClassDB::bind_method(D_METHOD("reset_trailmesh"), &TrailEmitter::reset_trailmesh);
 
 	ClassDB::add_property("TrailEmitter", PropertyInfo(Variant::OBJECT, "material", PROPERTY_HINT_RESOURCE_TYPE, "Material"), "set_material", "get_material");
 	ClassDB::add_property("TrailEmitter", PropertyInfo(Variant::OBJECT, "curve", PROPERTY_HINT_RESOURCE_TYPE, "Curve"), "set_curve", "get_curve");
@@ -192,6 +193,12 @@ void TrailEmitter::create_trailmesh() {
 	trail_mesh->set_as_top_level(true);
 	geometry_root_node->call_deferred("add_child", trail_mesh);
 
+}
+
+void TrailEmitter::reset_trailmesh() {
+	if (trail_mesh) {
+		trail_mesh->reset_mesh();
+	}
 }
 
 void TrailEmitter::offset_mesh_points(Vector3 offset) {

@@ -53,6 +53,13 @@ void TrailMesh::initialize_arrays() {
 	trail_points = new TrailPoint[num_points];
 }
 
+void TrailMesh::reset_mesh() {
+	if (trail_points) {
+		delete[] trail_points;
+	}
+	trail_points = new TrailPoint[num_points];
+}
+
 void TrailMesh::offset_mesh_points(Vector3 offset) {
 	emitter_transform.origin += offset;
 	for (int i = 0; i < num_points; i++) {

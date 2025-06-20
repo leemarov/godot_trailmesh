@@ -66,6 +66,8 @@ public:
 
 	Ref<Gradient> get_gradient() const;
 	void set_gradient(const Ref<Gradient> new_gradient);
+
+	void reset_mesh();
 };
 } //namespace godot
 
