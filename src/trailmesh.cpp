@@ -87,15 +87,16 @@ TrailMesh::~TrailMesh() {
 	delete[] trail_points;
 }
 
-void TrailMesh::update_transform() {
+void TrailMesh::update_emitter() {
 	if (trail_emitter) {
 		emitter_transform = trail_emitter->get_global_transform();
+		emitter_color = trail_emitter->get_emitter_color();
 	}
 }
 
 void TrailMesh::_ready() {
 	initialize_arrays();
-	update_transform();
+	update_emitter();
 
 	vertex_buffer.fill(emitter_transform.origin);
 
@@ -104,9 +105,7 @@ void TrailMesh::_ready() {
 	geometry[ArrayMesh::ARRAY_NORMAL] = normal_buffer;
 	geometry[ArrayMesh::ARRAY_TANGENT] = tangent_buffer;
 	geometry[ArrayMesh::ARRAY_TEX_UV] = uv_buffer;
-	if (gradient.is_valid()) {
-		geometry[ArrayMesh::ARRAY_COLOR] = color_buffer;
-	}
+	geometry[ArrayMesh::ARRAY_COLOR] = color_buffer;
 	ArrayMesh *mesh = memnew(ArrayMesh);
 	set_mesh(Ref(mesh));
 
@@ -120,7 +119,7 @@ void TrailMesh::_ready() {
 
 void TrailMesh::_process(double delta) {
 	Transform3D previous_emitter_transform = emitter_transform;
-	update_transform();
+	update_emitter();
 
 	if (!trail_emitter) {
 		// Handle removal
@@ -156,6 +155,7 @@ void TrailMesh::_process(double delta) {
 	trail_points[0].center = current_position;
 	trail_points[0].direction_vector = direction_vector;
 	trail_points[0].size = spawn_size;
+	trail_points[0].color = emitter_color;
 	Camera3D *camera = get_viewport()->get_camera_3d();
 
 	Vector3 camera_position = Vector3(0,0,0);
@@ -215,11 +215,13 @@ void TrailMesh::_process(double delta) {
 		uv_buffer[uvi++] = Vector2(x, 0);
 		uv_buffer[uvi++] = Vector2(x, 1);
 
+		Color color = tp.color;
 		if (gradient.is_valid()) {
-			Color color = gradient->sample((double(i + update_fraction) / double(num_points)));
-			color_buffer[ci++] = color;
-			color_buffer[ci++] = color;
+			Color grad_color = gradient->sample((double(i + update_fraction) / double(num_points)));
+			color = color * grad_color;
 		}
+		color_buffer[ci++] = color;
+		color_buffer[ci++] = color;
 	}
 
 	set_custom_aabb(AABB(min_pos, max_pos - min_pos));
@@ -231,9 +233,7 @@ void TrailMesh::_process(double delta) {
 		geometry[ArrayMesh::ARRAY_NORMAL] = normal_buffer;
 		geometry[ArrayMesh::ARRAY_TANGENT] = tangent_buffer;
 		geometry[ArrayMesh::ARRAY_TEX_UV] = uv_buffer;
-		if (gradient.is_valid()) {
-			geometry[ArrayMesh::ARRAY_COLOR] = color_buffer;
-		}
+		geometry[ArrayMesh::ARRAY_COLOR] = color_buffer;
 		mesh->add_surface_from_arrays(Mesh::PrimitiveType::PRIMITIVE_TRIANGLE_STRIP, geometry);
 	}
 

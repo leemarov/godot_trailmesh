@@ -28,6 +28,7 @@ private:
 	Array geometry;
 	TrailEmitter *trail_emitter;
 	Transform3D emitter_transform;
+	Color emitter_color;
 	Vector3 direction_vector;
 
 	PackedVector3Array vertex_buffer;

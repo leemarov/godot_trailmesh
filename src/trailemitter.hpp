@@ -24,6 +24,7 @@ private:
 	double uv_shift;
 	TrailMesh *trail_mesh;
 	NodePath geometry_root;
+	Color emitter_color;
 
 	Ref<Gradient> gradient;
 	Ref<Curve> curve;

@@ -31,6 +31,7 @@ void TrailEmitter::_bind_methods() {
 	ClassDB::add_property("TrailEmitter", PropertyInfo(Variant::OBJECT, "curve", PROPERTY_HINT_RESOURCE_TYPE, "Curve"), "set_curve", "get_curve");
 	ClassDB::add_property("TrailEmitter", PropertyInfo(Variant::OBJECT, "gradient", PROPERTY_HINT_RESOURCE_TYPE, "Gradient"), "set_gradient", "get_gradient");
 	ClassDB::add_property("TrailEmitter", PropertyInfo(Variant::NODE_PATH, "geometry_nodepath"), "set_geometry_root", "get_geometry_root");
+	ClassDB::add_property("TrailEmitter", PropertyInfo(Variant::COLOR, "emitter_color"), "set_emitter_color", "get_emitter_color");
 	ClassDB::add_property("TrailEmitter", PropertyInfo(Variant::INT, "num_points"), "set_num_points", "get_num_points");
 	ClassDB::add_property("TrailEmitter", PropertyInfo(Variant::FLOAT, "noise_scale"), "set_noise_scale", "get_noise_scale");
 	ClassDB::add_property("TrailEmitter", PropertyInfo(Variant::FLOAT, "size"), "set_size", "get_size");
@@ -45,6 +46,7 @@ TrailEmitter::TrailEmitter() {
 	noise_scale = 0.0;
 	update_interval = 0.1;
 	trail_mesh = nullptr;
+	emitter_color = Color(1.0,1.0,1.0,1.0);
 }
 
 TrailEmitter::~TrailEmitter() {
@@ -70,6 +72,14 @@ void TrailEmitter::set_geometry_root(NodePath nodepath) {
 
 NodePath TrailEmitter::get_geometry_root() const {
 	return geometry_root;
+}
+
+Color TrailEmitter::get_emitter_color() const {
+	return emitter_color;
+}
+
+TrailEmitter::set_emitter_color(Color color) {
+	emitter_color = color;
 }
 
 void TrailEmitter::set_material(Ref<Material> new_material) {
