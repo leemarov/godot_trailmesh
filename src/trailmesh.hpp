@@ -49,6 +49,7 @@ protected:
 	static void _bind_methods();
 	void initialize_arrays();
 	void offset_mesh_points(Vector3 offset);
+	void update_emitter();
 
 public:
 	TrailMesh();

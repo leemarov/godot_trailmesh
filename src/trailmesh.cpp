@@ -84,8 +84,8 @@ void TrailMesh::persist_root() {
 	Transform3D global_transform = get_global_transform();
 	if (is_inside_tree()) {
 		Viewport *vp = get_viewport();
-		get_parent()->remove_child(self);
-		vp->add_child(self);
+		get_parent()->remove_child(this);
+		vp->add_child(this);
 	}
 }
 
