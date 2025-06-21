@@ -20,7 +20,7 @@ jobs:
             float-precision: single
             arch: x86_64
             target-type: template_debug
-            os: ubuntu-20.04
+            os: ubuntu-latest
 
           - platform: windows
             float-precision: single
@@ -57,7 +57,7 @@ jobs:
             float-precision: single
             arch: x86_64
             target-type: template_release
-            os: ubuntu-20.04
+            os: ubuntu-latest
 
           - platform: windows
             float-precision: single
