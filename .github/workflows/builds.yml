@@ -40,30 +40,6 @@ jobs:
             target-type: template_debug
             os: macos-latest
 
-          - platform: android
-            float-precision: single
-            arch: arm64
-            target-type: template_debug
-            os: ubuntu-20.04
-
-          - platform: android
-            float-precision: single
-            arch: arm32
-            target-type: template_debug
-            os: ubuntu-20.04
-
-          - platform: android
-            float-precision: single
-            arch: x86_64
-            target-type: template_debug
-            os: ubuntu-20.04
-
-          - platform: android
-            float-precision: single
-            arch: x86_32
-            target-type: template_debug
-            os: ubuntu-20.04
-
             #          - platform: ios
             #            float-precision: single
             #            arch: arm64
@@ -101,36 +77,6 @@ jobs:
             target-type: template_release
             os: macos-latest
 
-          - platform: android
-            float-precision: single
-            arch: arm64
-            target-type: template_release
-            os: ubuntu-20.04
-
-          - platform: android
-            float-precision: single
-            arch: arm32
-            target-type: template_release
-            os: ubuntu-20.04
-
-          - platform: android
-            float-precision: single
-            arch: x86_64
-            target-type: template_release
-            os: ubuntu-20.04
-
-          - platform: android
-            float-precision: single
-            arch: x86_32
-            target-type: template_release
-            os: ubuntu-20.04
-
-            # - platform: ios
-            #   float-precision: single
-            #   arch: arm64
-            #   target-type: template_release
-            #   os: macos-latest
-
             # - platform: web
             #   float-precision: single
             #   arch: wasm32
@@ -162,30 +108,6 @@ jobs:
             #            arch: universal
             #            target-type: template_debug
             #            os: macos-latest
-            #
-            #          - platform: android
-            #            float-precision: double
-            #            arch: arm64
-            #            target-type: template_debug
-            #            os: ubuntu-20.04
-            #
-            #          - platform: android
-            #            float-precision: double
-            #            arch: arm32
-            #            target-type: template_debug
-            #            os: ubuntu-20.04
-            #
-            #          - platform: android
-            #            float-precision: double
-            #            arch: x86_64
-            #            target-type: template_debug
-            #            os: ubuntu-20.04
-            #
-            #          - platform: android
-            #            float-precision: double
-            #            arch: x86_32
-            #            target-type: template_debug
-            #            os: ubuntu-20.04
             #
             #          - platform: ios
             #            float-precision: double
@@ -223,30 +145,6 @@ jobs:
             #          #   arch: universal
             #          #   target-type: template_release
             #          #   os: macos-latest
-            #
-            #          # - platform: android
-            #          #   float-precision: double
-            #          #   arch: arm64
-            #          #   target-type: template_release
-            #          #   os: ubuntu-20.04
-            #
-            #          # - platform: android
-            #          #   float-precision: double
-            #          #   arch: arm32
-            #          #   target-type: template_release
-            #          #   os: ubuntu-20.04
-            #
-            #          # - platform: android
-            #          #   float-precision: double
-            #          #   arch: x86_64
-            #          #   target-type: template_release
-            #          #   os: ubuntu-20.04
-            #
-            #          # - platform: android
-            #          #   float-precision: double
-            #          #   arch: x86_32
-            #          #   target-type: template_release
-            #          #   os: ubuntu-20.04
             #
             #          # - platform: ios
             #          #   float-precision: double
@@ -344,15 +242,15 @@ jobs:
 
   # Merges all the build artifacts together into a single godot-cpp-template artifact.
   # If you comment out this step, all the builds will be uploaded individually.
-  #  merge:
-  #    runs-on: ubuntu-20.04
-  #    needs: build
-  #    steps:
-  #      - name: Merge Artifacts
-  #        uses: actions/upload-artifact/merge@v4
-  #        with:
-  #          name: godot-cpp-template
-  #          pattern: godot-cpp-template-*
-  #          delete-merged: true
-  #      - name: ls
-  #
+  merge:
+    runs-on: ubuntu-20.04
+    needs: build
+    steps:
+      - name: Merge Artifacts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: godot-cpp-template
+          pattern: godot-cpp-template-*
+          delete-merged: true
+      - name: ls
+  
